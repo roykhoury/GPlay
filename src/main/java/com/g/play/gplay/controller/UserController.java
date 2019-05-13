@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * List of endpoints related to users
  */
@@ -143,6 +146,20 @@ public class UserController {
             return new ResponseEntity<>("Playlist does not exist!", HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>("Error while creating playlist, exception: " + e.toString(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Endpoint to retrieve friends list for a logged in user
+     *
+     * @return the List of User objects that are friends with logged in user
+     */
+    @RequestMapping(value = "/friend/all", method = RequestMethod.GET)
+    public ResponseEntity<List<User>> getFriendsList() {
+        try {
+            return new ResponseEntity<>(userService.getFriendsList(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
     }
 }

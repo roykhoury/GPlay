@@ -29,7 +29,7 @@ public class User {
     @Indexed(unique = true)
     private String email;
 
-    private List friendIdsList;
+    private List<Long> friendIdsList;
 
     private List<PlayList> playLists;
 
@@ -85,11 +85,11 @@ public class User {
         this.email = email;
     }
 
-    public List getFriendIdsList() {
+    public List<Long> getFriendIdsList() {
         return friendIdsList;
     }
 
-    public User withFriendsList(List friendIdsList) {
+    public User withFriendsList(List<Long> friendIdsList) {
         this.friendIdsList = friendIdsList;
         return this;
     }
@@ -104,7 +104,7 @@ public class User {
         return this;
     }
 
-    public void setFriendIdsList(List friendIdsList) {
+    public void setFriendIdsList(List<Long> friendIdsList) {
         this.friendIdsList = friendIdsList;
     }
 

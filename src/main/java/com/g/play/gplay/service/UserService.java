@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -166,5 +167,19 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    /**
+     * Parse the list of friend IDs into the list of User objects using the user repository
+     *
+     * @return the list of users
+     */
+    public List<User> getFriendsList() {
+        List<User> friends = new ArrayList<>();
+        for (long id : this.loggedInUser.getFriendIdsList()) {
+            Optional<User> friend = userRepository.findById(id);
+            friend.ifPresent(friends::add);
+        }
+        return friends;
     }
 }
