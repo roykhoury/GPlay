@@ -26,6 +26,18 @@ public class UserService {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
+    @Autowired
+    private RoomService roomService;
+
+    /**
+     * Get the logged in user
+     *
+     * @return the User object
+     */
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
+
     /**
      * Register a new User in the system
      *

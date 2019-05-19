@@ -8,7 +8,20 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * retrieve physical copies of the user information stored
  */
 public interface UserRepository extends MongoRepository<User, Long> {
+
+    /**
+     * Find a user
+     *
+     * @param username the user username
+     * @return the User object
+     */
     User findUserByUsername(String username);
 
-    User findUserByEmail(String username);
+    /**
+     * Find a user
+     *
+     * @param email the user email
+     * @return the User object
+     */
+    User findUserByEmail(String email);
 }
