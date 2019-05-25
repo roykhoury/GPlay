@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/header';
-import AlbumArt from './components/albumArt';
 import TrackDetails from './components/trackDetails';
 import Controls from './components/controls';
 import SeekBar from './components/seekbar';
@@ -44,8 +42,6 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          <Header message="Some Header Te" />
-          <AlbumArt url="./assets/icon.png" />
           <TrackDetails title="Some song title" artist="Some artist" />
           <SeekBar trackLength={204} currentPosition={156} />
           <Controls />

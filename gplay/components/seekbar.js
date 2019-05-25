@@ -5,7 +5,7 @@ export default class SeekBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 50,
+      value: 0,
     };
   }
 
