@@ -5,38 +5,53 @@ import AlbumArt from './components/albumArt';
 import TrackDetails from './components/trackDetails';
 import Controls from './components/controls';
 import SeekBar from './components/seekbar';
+import { Ionicons } from '@expo/vector-icons';
+import { AppLoading, Font } from 'expo';
 
 export default class App extends React.Component {
+  // Init page into loading mode
   state = {
-      loading: true
+      isLoadingComplete: false,
   };
 
-  componentDidMount() {
-    this.setState({ loading: false });
+  // Display the page content
+  _handleFinishLoading = () => {
+    this.setState({ isLoadingComplete: true });
+  };
+
+  // Load the ionIcons before displaying the page content
+  _loadResourcesAsync = async() => {
+    return Promise.all([
+      Font.loadAsync({
+        ...Ionicons.font,
+      })
+    ]);
+  }
+
+  _handleLoadingError = error => {
+    console.error(error);
   }
 
   render() {
-    const { loading } = this.state;
-
-    if(loading) {
+    if (!this.state.isLoadingComplete) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
       return (
         <View style={styles.container}>
-          <Text style={{color: 'white'}}>
-            Loading
-          </Text>
+          <Header message="Some Header Te" />
+          <AlbumArt url="./assets/icon.png" />
+          <TrackDetails title="Some song title" artist="Some artist" />
+          <SeekBar trackLength={204} currentPosition={156} />
+          <Controls />
         </View>
       );
     }
-
-    return (
-      <View style={styles.container}>
-        <Header message="Some Header Te" />
-        <AlbumArt url="./assets/icon.png" />
-        <TrackDetails title="Some song title" artist="Some artist" />
-        <SeekBar trackLength={204} currentPosition={156} />
-        <Controls />
-      </View>
-    );
   }
 }
 
