@@ -45,7 +45,7 @@ public class UserController {
      * @param user the user information (user/pass)
      * @return the Response Entity feedback message and the Http status code
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestBody User user) {
         try {
             User newUser = userService.login(user.getUsername(), user.getPassword());
