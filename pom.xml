@@ -44,10 +44,12 @@
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
             <artifactId>content-fs-spring-boot-starter</artifactId>
+            <version>0.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
-            <artifactId>spring-content-rest-boot-starter</artifactId>
+            <artifactId>content-rest-spring-boot-starter</artifactId>
+            <version>0.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin.external.google</groupId>
