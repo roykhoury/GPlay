@@ -1,61 +1,89 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import TrackDetails from './components/trackDetails';
-import Controls from './components/controls';
-import SeekBar from './components/seekbar';
-import { Ionicons } from '@expo/vector-icons';
-import { AppLoading, Font } from 'expo';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { ThemeProvider, Button } from 'react-native-elements';
+import { ToastAndroid } from 'react-native';
+import MainMenu from './views/mainMenu';
 
 export default class App extends React.Component {
-  // Init page into loading mode
-  state = {
-      isLoadingComplete: false,
-  };
+    // Init page into loading mode
+    state = {
+        loading: false,
+        loggedInUser: {},
+        navigation: {
+            loadMainMenu: true,
+            loadHome: false,
+        }
+    };
 
-  // Display the page content
-  _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
-  };
-
-  // Load the ionIcons before displaying the page content
-  _loadResourcesAsync = async() => {
-    return Promise.all([
-      Font.loadAsync({
-        ...Ionicons.font,
-      })
-    ]);
-  }
-
-  _handleLoadingError = error => {
-    console.error(error);
-  }
-
-  render() {
-    if (!this.state.isLoadingComplete) {
-      return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.container}>
-          <TrackDetails title="Some song title" artist="Some artist" />
-          <SeekBar trackLength={204} currentPosition={156} />
-          <Controls />
-        </View>
-      );
+    login = async () => {
+        this.setState({ loading: true });
+        let loginUrl = 'http://192.168.0.106:8080/user/login';
+        fetch(loginUrl, {
+            method: 'POST',
+            headers: {
+                Accept: '*/*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic cm95a2hvdXJ5OmFkbWluUG93ZXI=',
+            },
+            body: JSON.stringify({
+                "username": "someNewUser2",
+                "password": "somePassword2",
+            })
+        }).then((res) => res.json())
+            .then(resJson => {
+                this.setState({
+                    loading: false,
+                    loggedInUser: resJson,
+                    navigation: {
+                        loadMainMenu: false,
+                        loadHome: true,
+                    }
+                });
+            })
+            .catch((error) => {
+                this.setState({ loading: false });
+                ToastAndroid.showWithGravity(
+                    "Something wrong happened, \nPlease try again later",
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP,
+                );
+            });
     }
-  }
+
+    render() {
+        return (
+            <ThemeProvider theme={theme}>
+                <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+                    {this.state.navigation.loadMainMenu ?
+                        <Button
+                            title="Log in"
+                            onPress={this.login}
+                            containerStyle={styles.loginButton}
+                            loading={this.state.loading}
+                        />
+                    : null}
+                    {this.state.navigation.loadHome ?
+                        <MainMenu hostUser={this.state.loggedInUser} />
+                    : null}
+                </KeyboardAvoidingView>
+            </ThemeProvider>
+        );
+    }
 }
+const theme = {
+    colors: {
+        primary: '#389E9E',
+    },
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgb(4,4,4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: 'rgb(4,4,4)',
+        justifyContent: 'center',
+    },
+    loginButton: {
+        width: 200,
+        alignSelf: 'center',
+    }
 });

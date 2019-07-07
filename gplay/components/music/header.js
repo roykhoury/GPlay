@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import {
   View,
+  KeyboardAvoidingView,
   Text,
   StyleSheet,
   TouchableOpacity,

@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import {
   View,
+  KeyboardAvoidingView,
   Text,
   StyleSheet,
   Image,
@@ -19,27 +20,27 @@ const TrackDetails = ({
   onTitlePress,
   onArtistPress,
 }) => (
-  <View style={styles.container}>
-    <TouchableOpacity onPress={onAddPress}>
-      <Ionicons name="md-add" size={32} color="white" />
-    </TouchableOpacity>
-    <View style={styles.detailsWrapper}>
-      <Text style={styles.title} onPress={onTitlePress}>{title}</Text>
-      <Text style={styles.artist} onPress={onArtistPress}>{artist}</Text>
-    </View>
-    <TouchableOpacity onPress={onMorePress}>
-      <View style={styles.moreButton}>
-        <Ionicons name="md-more" size={32} color="white" />
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onAddPress}>
+        <Ionicons name="md-add" size={24} color="white" />
+      </TouchableOpacity>
+      <View style={styles.detailsWrapper}>
+        <Text style={styles.title} onPress={onTitlePress}>{title}</Text>
+        <Text style={styles.artist} onPress={onArtistPress}>{artist}</Text>
       </View>
-    </TouchableOpacity>
-  </View>
-);
+      <TouchableOpacity onPress={onMorePress}>
+        <View style={styles.moreButton}>
+          <Ionicons name="md-more" size={24} color="white" />
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 
 export default TrackDetails;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 24,
+    paddingTop: 44,
     flexDirection: 'row',
     paddingLeft: 20,
     alignItems: 'center',

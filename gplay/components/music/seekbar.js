@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Slider} from 'react-native';
+import {StyleSheet, Text, View, KeyboardAvoidingView, Slider} from 'react-native';
 
 export default class SeekBar extends React.Component {
   constructor(props) {
