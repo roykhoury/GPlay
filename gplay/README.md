@@ -1,9 +1,8 @@
 # User interface mobile application for GPlay
 
 ### Dependencies
-- React Native
-- Expo
-- Yarn version 1.10.1
+- Expo-cli
+- Yarn
 
 ### Installation
 - Open the project with IDE
