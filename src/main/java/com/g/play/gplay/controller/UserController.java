@@ -46,14 +46,12 @@ public class UserController {
      * @return the Response Entity feedback message and the Http status code
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<User> login(@RequestBody User user) {
         try {
             User newUser = userService.login(user.getUsername(), user.getPassword());
-            return new ResponseEntity<>("Successfully logged in, Welcome " + newUser.getUsername() + "!", HttpStatus.OK);
-        } catch (NullPointerException e) {
-            return new ResponseEntity<>("Invalid Password!", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error while logging in, exception: " + e.toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(newUser, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 

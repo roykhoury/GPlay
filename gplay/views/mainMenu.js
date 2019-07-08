@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { ToastAndroid } from 'react-native';
 import Room from './room';
 
 export default class MainMenu extends React.Component {
-
     // Init page into loading mode
     state = {
         room: null,
@@ -20,7 +18,7 @@ export default class MainMenu extends React.Component {
 
     onPressCreateRoom = async() => {
         this.setState({ loadingCreateRoom: true });
-        let createRoomUrl = 'http://192.168.0.106:8080/room/create';
+        let createRoomUrl = 'http://192.168.0.107:8080/room/create';
         fetch(createRoomUrl, {
             method: 'POST',
             headers: {
@@ -42,17 +40,13 @@ export default class MainMenu extends React.Component {
             })
             .catch((error) => {
                 this.setState({ loadingCreateRoom: false });
-                ToastAndroid.showWithGravity(
-                    "Something wrong happened, \nPlease try again later",
-                    ToastAndroid.LONG,
-                    ToastAndroid.TOP,
-                );
+                console.log(error)
             });
     }
 
     onPressJoinRoom = async() => {
         this.setState({ loadingJoinRoom: true });
-        let joinRoomUrl = 'http://192.168.0.106:8080/room/join/93';
+        let joinRoomUrl = 'http://192.168.0.107:8080/room/join/93';
         fetch(joinRoomUrl, {
             method: 'PUT',
             headers: {
@@ -74,18 +68,15 @@ export default class MainMenu extends React.Component {
         .catch((error) => {
             console.log(error);
             this.setState({ loadingJoinRoom: false });
-            ToastAndroid.showWithGravity(
-                "Something wrong happened, \nPlease try again later",
-                ToastAndroid.LONG,
-                ToastAndroid.TOP,
-            );
         });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcomeText}>Welcome back, {this.props.hostUser.username}!</Text>
+                {this.state.navigation.loadMainMenu ?
+                    <Text style={styles.welcomeText}>Welcome back, {this.props.hostUser.username}!</Text>
+                : null}
                 {this.state.navigation.loadMainMenu ?
                     <Button
                         title="Create room"

@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ThemeProvider, Button } from 'react-native-elements';
-import { ToastAndroid } from 'react-native';
 import MainMenu from './views/mainMenu';
 
 export default class App extends React.Component {
@@ -17,7 +16,7 @@ export default class App extends React.Component {
 
     login = async () => {
         this.setState({ loading: true });
-        let loginUrl = 'http://192.168.0.106:8080/user/login';
+        let loginUrl = 'http://192.168.0.107:8080/user/login';
         fetch(loginUrl, {
             method: 'POST',
             headers: {
@@ -42,18 +41,14 @@ export default class App extends React.Component {
             })
             .catch((error) => {
                 this.setState({ loading: false });
-                ToastAndroid.showWithGravity(
-                    "Something wrong happened, \nPlease try again later",
-                    ToastAndroid.LONG,
-                    ToastAndroid.TOP,
-                );
+                console.log(error)
             });
     }
 
     render() {
         return (
             <ThemeProvider theme={theme}>
-                <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+                <View style={styles.container} behavior="padding" enabled>
                     {this.state.navigation.loadMainMenu ?
                         <Button
                             title="Log in"
@@ -65,7 +60,7 @@ export default class App extends React.Component {
                     {this.state.navigation.loadHome ?
                         <MainMenu hostUser={this.state.loggedInUser} />
                     : null}
-                </KeyboardAvoidingView>
+                </View>
             </ThemeProvider>
         );
     }

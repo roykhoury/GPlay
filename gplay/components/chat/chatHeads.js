@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from 'react-native-elements';
-import { ToastAndroid, Text } from 'react-native';
+import { Text } from 'react-native';
 
 import {
   View,
@@ -17,7 +17,7 @@ export default class ChatHeads extends React.Component {
     }
 
     updateHeads = async() => {
-        let getUsersUrl = 'http://192.168.0.106:8080/user/getUsers?userIds=' + this.props.members;
+        let getUsersUrl = 'http://192.168.0.107:8080/user/getUsers?userIds=' + this.props.members;
         fetch(getUsersUrl, {
             method: 'GET',
             headers: {
@@ -32,11 +32,6 @@ export default class ChatHeads extends React.Component {
         })
         .catch((error) => {
             console.log(error);
-            ToastAndroid.showWithGravity(
-                "Something wrong happened, \nPlease try again later",
-                ToastAndroid.LONG,
-                ToastAndroid.TOP,
-            );
         });
     }
 

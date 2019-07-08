@@ -25,16 +25,12 @@ public class RoomController {
      * @return The response entity with appropriate message and Http status
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<String> createRoom(@RequestBody String name) {
+    public ResponseEntity<Room> createRoom(@RequestBody String name) {
         try {
             Room newRoom = roomService.createRoom(name);
-            if (newRoom != null) {
-                return new ResponseEntity<>("Successfully created room " + newRoom.getName(), HttpStatus.OK);
-            } else {
-                throw new NullPointerException("Could not create room!");
-            }
+            return new ResponseEntity<>(newRoom, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error while creating room, exception: " + e.toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -44,15 +40,11 @@ public class RoomController {
      * @return The response entity with appropriate message and Http status
      */
     @RequestMapping(value = "/end", method = RequestMethod.POST)
-    public ResponseEntity<String> endRoom() {
+    public ResponseEntity<Boolean> endRoom() {
         try {
-            if (roomService.endRoom()) {
-                return new ResponseEntity<>("Successfully ended room!", HttpStatus.OK);
-            } else {
-                throw new NullPointerException("Could not end room!");
-            }
+            return new ResponseEntity<>(roomService.endRoom(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error while ending room, exception: " + e.toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }
 

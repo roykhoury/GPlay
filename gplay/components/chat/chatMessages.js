@@ -56,7 +56,8 @@ export default class ChatMessages extends Component {
         return (
             <InputToolbar
                 {...props}
-                containerStyle={styles.messageInput}
+                containerStyle={styles.containerInput}
+                textInputStyle={styles.messageInput}
                 placeholder="Type your message here..."
             />
         )
@@ -78,7 +79,6 @@ export default class ChatMessages extends Component {
 
     render() {
         return (
-            
                 <GiftedChat
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
@@ -105,7 +105,10 @@ const styles = StyleSheet.create({
     paddingRight: 12,
   },
   messageInput: {
-    backgroundColor: 'rgb(4,4,4)',
+    color: '#ffffff',
+  },
+  containerInput: {
+    backgroundColor: '#000',
     borderTopColor: '#222',
   },
   sendButtonWrapper: {
