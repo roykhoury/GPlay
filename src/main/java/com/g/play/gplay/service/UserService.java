@@ -66,14 +66,14 @@ public class UserService {
      * @param password the user password
      * @return the logged in user object
      */
-    public User login(String username, String password) {
+    public User login(String username, String password) throws Exception {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = userRepository.findUserByUsername(username);
-        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
+        if (user != null && bCryptPasswordEncoder.matches(password, user.getPassword())) {
             this.loggedInUser = user;
             return user;
         }
-        return null;
+        throw new Exception();
     }
 
     /**
@@ -107,7 +107,7 @@ public class UserService {
      * @param friendId the user ID of the friend to add
      * @return the added friend object
      */
-    public User addFriend(long friendId) {
+    public User addFriend(long friendId) throws Exception {
         Optional<User> friend = userRepository.findById(friendId);
         if (friend.isPresent() && !this.loggedInUser.getFriendIdsList().contains(friendId) && friendId != this.loggedInUser.getId()) {
             this.loggedInUser.addFriendId(friendId);
@@ -118,7 +118,7 @@ public class UserService {
 
             return friend.get();
         }
-        return null;
+        throw new Exception();
     }
 
     /**
@@ -130,7 +130,7 @@ public class UserService {
      * @param friendId the user ID of the friend to remove
      * @return the removed friend object
      */
-    public User removeFriend(long friendId) {
+    public User removeFriend(long friendId) throws Exception {
         Optional<User> friend = userRepository.findById(friendId);
         if (friend.isPresent() && this.loggedInUser.getFriendIdsList().contains(friendId) && friendId != this.loggedInUser.getId()) {
             this.loggedInUser.removeFriendId(friendId);
@@ -141,7 +141,7 @@ public class UserService {
 
             return friend.get();
         }
-        return null;
+        throw new Exception();
     }
 
     /**

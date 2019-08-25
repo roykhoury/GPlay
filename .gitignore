@@ -32,5 +32,9 @@ target/*
 .settings/*
 .vscode/*
 
+# Intellij
+.idea/*
+
+
 # Yarn
 yarn.lock

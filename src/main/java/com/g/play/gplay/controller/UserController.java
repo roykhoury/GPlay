@@ -93,7 +93,7 @@ public class UserController {
     public ResponseEntity<String> addFriend(@PathVariable("friendId") long friendId) {
         try {
             return new ResponseEntity<>("Successfully added friend: " + userService.addFriend(friendId).getUsername(), HttpStatus.OK);
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return new ResponseEntity<>("User id: " + friendId + " was not added as a friend!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -108,7 +108,7 @@ public class UserController {
     public ResponseEntity<String> removeFriend(@PathVariable("friendId") long friendId) {
         try {
             return new ResponseEntity<>("Successfully removed friend: " + userService.removeFriend(friendId).getUsername(), HttpStatus.OK);
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return new ResponseEntity<>("User id: " + friendId + " was not removed as a friend!", HttpStatus.BAD_REQUEST);
         }
     }
