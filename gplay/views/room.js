@@ -15,7 +15,7 @@ export default class Room extends React.Component {
     isLoadingComplete: false,
     isRenderingComplete: false,
     soundObject: new Audio.Sound(),
-    audioUrl: 'http://192.168.0.107:8080/music/play?id=5d2283728d76f83918a090ca',
+    audioUrl: 'http://192.168.0.108:8080/music/play?id=5d2283728d76f83918a090ca',
   };
 
   // Display the page content

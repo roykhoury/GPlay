@@ -17,7 +17,7 @@ export default class ChatHeads extends React.Component {
     }
 
     updateHeads = async() => {
-        let getUsersUrl = 'http://192.168.0.107:8080/user/getUsers?userIds=' + this.props.members;
+        let getUsersUrl = 'http://192.168.0.108:8080/user/getUsers?userIds=' + this.props.members;
         fetch(getUsersUrl, {
             method: 'GET',
             headers: {

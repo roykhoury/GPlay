@@ -18,7 +18,7 @@ export default class MainMenu extends React.Component {
 
     onPressCreateRoom = async() => {
         this.setState({ loadingCreateRoom: true });
-        let createRoomUrl = 'http://192.168.0.107:8080/room/create';
+        let createRoomUrl = 'http://192.168.0.108:8080/room/create';
         fetch(createRoomUrl, {
             method: 'POST',
             headers: {
@@ -46,7 +46,7 @@ export default class MainMenu extends React.Component {
 
     onPressJoinRoom = async() => {
         this.setState({ loadingJoinRoom: true });
-        let joinRoomUrl = 'http://192.168.0.107:8080/room/join/93';
+        let joinRoomUrl = 'http://192.168.0.108:8080/room/join/93';
         fetch(joinRoomUrl, {
             method: 'PUT',
             headers: {

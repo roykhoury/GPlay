@@ -20,7 +20,7 @@ public class Room {
     @Id
     private long id;
 
-    @Indexed(unique = true)
+    @Indexed
     private String name;
 
     @Indexed(unique = true)

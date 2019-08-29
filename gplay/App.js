@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
     login = async () => {
         this.setState({ loading: true });
-        let loginUrl = 'http://192.168.0.107:8080/user/login';
+        let loginUrl = 'http://localhost:8080/user/login';
         fetch(loginUrl, {
             method: 'POST',
             headers: {
