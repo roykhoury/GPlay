@@ -76,11 +76,12 @@ export default class Room extends React.Component {
           <TrackDetails title="Some song title" artist="Some artist" />
           <SeekBar />
           <Controls
+            controlsDisabled={this.props.isJoined}
             onPressPlay={this.onPressPlay}
             onPressPause={this.onPressPause}
             paused={this.state.paused}
           />
-          <ChatHeads host={this.props.room.host} members={this.props.room.memberIds} updateHead={this.props.updateHead} />
+          <ChatHeads host={this.props.room.host} members={this.props.room.memberIds} />
           <ChatMessages />
         </View>
       );

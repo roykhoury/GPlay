@@ -37,6 +37,7 @@ export default class ChatHeads extends React.Component {
 
     // Initial messages in the group chat
     componentWillMount() {
+        this.updateHeads();
         this.setState({
             users: [
                 {
@@ -47,9 +48,6 @@ export default class ChatHeads extends React.Component {
                 },
             ],
         })
-        if (this.props.updateHead) {
-            this.updateHeads();
-        }
     }
 
     renderItem = user => {

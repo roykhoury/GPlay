@@ -46,7 +46,7 @@ export default class MainMenu extends React.Component {
 
     onPressJoinRoom = async() => {
         this.setState({ loadingJoinRoom: true });
-        let joinRoomUrl = 'http://192.168.0.108:8080/room/join/93';
+        let joinRoomUrl = 'http://192.168.0.108:8080/room/join/50';
         fetch(joinRoomUrl, {
             method: 'PUT',
             headers: {
@@ -94,7 +94,7 @@ export default class MainMenu extends React.Component {
                     />
                 : null}
                 {this.state.navigation.loadRoomCreated || this.state.navigation.loadRoomJoined ? 
-                    <Room room={this.state.room} updateHead={this.state.navigation.loadRoomJoined} />
+                    <Room room={this.state.room} isJoined={this.state.navigation.loadRoomJoined} />
                 : null}
             </View>
         );

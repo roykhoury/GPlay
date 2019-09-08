@@ -18,26 +18,27 @@ const Controls = ({
   onPressShuffle,
   onPressRepeat,
   forwardDisabled,
+  controlsDisabled,
 }) => (
   <View style={styles.container}>
 
-    <TouchableOpacity activeOpacity={0.0} onPress={onPressShuffle}>
+    <TouchableOpacity activeOpacity={0.0} onPress={onPressShuffle} disabled={controlsDisabled}>
         <Ionicons name="md-shuffle" size={30} color="white" />
     </TouchableOpacity>
 
     <View style={{width: 40}} />
-      <TouchableOpacity onPress={onBack}>
+      <TouchableOpacity onPress={onBack} disabled={controlsDisabled}>
         <Ionicons name="md-skip-backward" size={30} color="white" />
       </TouchableOpacity>
     <View style={{width: 20}} />
 
     {!paused ?
-      <TouchableOpacity onPress={onPressPause}>
+      <TouchableOpacity onPress={onPressPause} disabled={controlsDisabled}>
         <View style={styles.pauseButton}>
           <Ionicons name="md-pause" size={30} color="white" />
         </View>
       </TouchableOpacity> :
-      <TouchableOpacity onPress={onPressPlay}>
+      <TouchableOpacity onPress={onPressPlay} disabled={controlsDisabled}>
         <View style={styles.playButton}>
           <Ionicons name="md-play" size={30} color="white" />
         </View>
@@ -45,13 +46,13 @@ const Controls = ({
     }
   
     <View style={{width: 20}} />
-    <TouchableOpacity onPress={onForward} disabled={forwardDisabled}>
+    <TouchableOpacity onPress={onForward} disabled={controlsDisabled}>
         <Ionicons style={[forwardDisabled && {opacity: 0.3}]}
           name="md-skip-forward" size={30} color="white" />
     </TouchableOpacity>
 
     <View style={{width: 40}} />
-    <TouchableOpacity activeOpacity={0.0} onPress={onPressRepeat}>
+    <TouchableOpacity activeOpacity={0.0} onPress={onPressRepeat} disabled={controlsDisabled}>
       <Ionicons name="md-repeat" size={30} color="white" />
     </TouchableOpacity>
 

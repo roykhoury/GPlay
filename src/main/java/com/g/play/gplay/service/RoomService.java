@@ -76,9 +76,9 @@ public class RoomService {
      * @param id the room ID
      * @return true if room was successfully updated
      */
-    public boolean joinRoom(long id) {
+    public Room joinRoom(long id) throws Exception {
         if (userService.getLoggedInUser() == null) {
-            return false;
+            throw new Exception();
         }
 
         /*
@@ -88,12 +88,10 @@ public class RoomService {
          */
         Optional<Room> roomToJoin = roomRepository.findById(id);
         if (roomToJoin.isPresent() && !alreadyJoined(roomToJoin.get()) && userService.getLoggedInUser().getId() != roomToJoin.get().getHost().getId()) {
-            roomRepository.save(
-                    roomToJoin.get().addMember(this.userService.getLoggedInUser().getId())
-            );
-            return true;
+            roomRepository.save(roomToJoin.get().addMember(this.userService.getLoggedInUser().getId()));
+            return roomToJoin.orElse(null);
         }
-        return false;
+        return null;
     }
 
     /**

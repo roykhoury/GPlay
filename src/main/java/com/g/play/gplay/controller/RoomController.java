@@ -56,15 +56,16 @@ public class RoomController {
      * @return The response entity with appropriate message and Http status
      */
     @RequestMapping(value = "/join/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> joinRoom(@PathVariable("id") @NotNull Long id) {
+    public ResponseEntity<Room> joinRoom(@PathVariable("id") @NotNull Long id) {
         try {
-            if (roomService.joinRoom(id)) {
-                return new ResponseEntity<>("Successfully joined!", HttpStatus.OK);
+            Room room = roomService.joinRoom(id);
+            if (room != null) {
+                return new ResponseEntity<>(room, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Failed to join room!", HttpStatus.BAD_REQUEST);
+                throw new Exception();
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Failed to join room, exception: " + e.toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
