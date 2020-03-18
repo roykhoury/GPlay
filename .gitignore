@@ -38,3 +38,4 @@ target/*
 
 # Yarn
 yarn.lock
+node_modules/**/*
